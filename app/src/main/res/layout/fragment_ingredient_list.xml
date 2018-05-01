@@ -2,18 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.android.www.bakingapp.IngredientListFragment">
 
     <TextView
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Recipe Steps"
+        android:text="Ingredients"
         android:layout_gravity=""/>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_recipe_steps"
+        android:id="@+id/rv_recipe_ingredient"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.android.www.bakingapp.model.Ingredient;
 import com.android.www.bakingapp.model.Recipe;
 import com.android.www.bakingapp.model.Step;
 
@@ -31,10 +32,16 @@ public class DetailActivity extends AppCompatActivity
                         .commit();
 
                 Step step = recipe.getSteps().get(mItemListFragmentPosition);
-
                 DetailStepFragment detailStepFragment = DetailStepFragment.newInstance(step);
+
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.detail_step_container, detailStepFragment)
+                        .commit();
+
+                IngredientListFragment ingredientListFragment = IngredientListFragment.newInstance(recipe);
+
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.ingredient_list_container, ingredientListFragment)
                         .commit();
             }
         }
