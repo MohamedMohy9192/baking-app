@@ -1,6 +1,7 @@
 package com.android.www.bakingapp;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -23,7 +24,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StepListFragment extends Fragment {
+public class StepListFragment extends Fragment implements StepListAdapter.OnStepItemClickListener {
 
     public static final String RECIPE_STEP_LIST = "recipe_step_list";
 
@@ -33,6 +34,12 @@ public class StepListFragment extends Fragment {
     private StepListAdapter mStepListAdapter;
 
     private Unbinder unbinder;
+
+    private OnListFragmentListener mOnListFragmentListener;
+
+    public interface OnListFragmentListener {
+        void onListFragmentItemClicked(int itemListFragmentPosition);
+    }
 
     public StepListFragment() {
         // Required empty public constructor
@@ -46,6 +53,17 @@ public class StepListFragment extends Fragment {
         StepListFragment fragment = new StepListFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnListFragmentListener = (OnListFragmentListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString()
+                    + "must implement OnListFragmentListener");
+        }
     }
 
     @Override
@@ -63,7 +81,7 @@ public class StepListFragment extends Fragment {
 
         mRecyclerView.setHasFixedSize(true);
 
-        mStepListAdapter = new StepListAdapter();
+        mStepListAdapter = new StepListAdapter(this);
 
         mRecyclerView.setAdapter(mStepListAdapter);
 
@@ -76,11 +94,14 @@ public class StepListFragment extends Fragment {
                 List<Step> steps = recipe.getSteps();
                 mStepListAdapter.setSteps(steps);
             }
-
-
         }
 
         return rootView;
+    }
+
+    @Override
+    public void onStepItemClicked(int itemPosition) {
+        mOnListFragmentListener.onListFragmentItemClicked(itemPosition);
     }
 
     @Override

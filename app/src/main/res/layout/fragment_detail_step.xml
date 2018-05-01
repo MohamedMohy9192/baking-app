@@ -2,12 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.android.www.bakingapp.DetailStepFragment">
 
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+    <TextView
+        android:id="@+id/tv_step_short_description"
+        style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/exo_player_view_height"
-        android:id="@+id/player_view"/>
+        android:layout_height="wrap_content"
+        android:padding="8dp" />
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/exo_player_view_height" />
+
+    <TextView
+        android:id="@+id/tv_step_description"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" />
 
 
 </LinearLayout>

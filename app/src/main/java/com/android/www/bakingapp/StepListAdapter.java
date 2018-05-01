@@ -22,6 +22,16 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepLi
 
     private List<Step> mSteps;
 
+    private OnStepItemClickListener mOnStepItemClickListener;
+
+    public interface OnStepItemClickListener {
+        void onStepItemClicked(int itemPosition);
+    }
+
+    public StepListAdapter(OnStepItemClickListener stepItemClickListener) {
+        this.mOnStepItemClickListener = stepItemClickListener;
+    }
+
     @NonNull
     @Override
     public StepListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,12 +59,12 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepLi
     public void setSteps(List<Step> steps) {
         this.mSteps = steps;
 
-        if (mSteps != null){
+        if (mSteps != null) {
             notifyDataSetChanged();
         }
     }
 
-    public class StepListViewHolder extends RecyclerView.ViewHolder {
+    public class StepListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tv_step_short_description)
         TextView stepShortDescriptionTextView;
@@ -62,6 +72,15 @@ public class StepListAdapter extends RecyclerView.Adapter<StepListAdapter.StepLi
         public StepListViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getAdapterPosition();
+
+            mOnStepItemClickListener.onStepItemClicked(itemPosition);
         }
     }
 }

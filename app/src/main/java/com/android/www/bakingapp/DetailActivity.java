@@ -5,16 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.www.bakingapp.model.Recipe;
+import com.android.www.bakingapp.model.Step;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity
+        implements StepListFragment.OnListFragmentListener {
 
+
+    int mItemListFragmentPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        if (savedInstanceState == null){
+        if (savedInstanceState == null) {
 
             Intent intent = getIntent();
 
@@ -25,8 +29,29 @@ public class DetailActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.step_list_container, stepListFragment)
                         .commit();
+
+                Step step = recipe.getSteps().get(mItemListFragmentPosition);
+
+                DetailStepFragment detailStepFragment = DetailStepFragment.newInstance(step);
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.detail_step_container, detailStepFragment)
+                        .commit();
             }
         }
 
+    }
+
+    @Override
+    public void onListFragmentItemClicked(int itemListFragmentPosition) {
+        mItemListFragmentPosition = itemListFragmentPosition;
+
+        Intent intent = getIntent();
+        Recipe recipe = intent.getParcelableExtra(MainActivity.RECIPE_INTENT_EXTRA);
+
+        Step step = recipe.getSteps().get(mItemListFragmentPosition);
+        DetailStepFragment detailStepFragment = DetailStepFragment.newInstance(step);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.detail_step_container, detailStepFragment)
+                .commit();
     }
 }

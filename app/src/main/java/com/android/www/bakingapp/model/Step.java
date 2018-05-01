@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by OWNER on 4/28/2018.
  */
 
-public class Step implements Parcelable, Serializable {
+public class Step implements Parcelable {
     private int id;
     private String shortDescription;
     private String description;

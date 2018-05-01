@@ -3,21 +3,12 @@ package com.android.www.bakingapp;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.android.www.bakingapp.model.Ingredient;
 import com.android.www.bakingapp.model.Recipe;
 import com.android.www.bakingapp.model.Step;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -32,15 +23,10 @@ import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
 /**
@@ -49,33 +35,57 @@ import butterknife.ButterKnife;
 public class DetailStepFragment extends Fragment {
 
     private static final String LOG_TAG = DetailStepFragment.class.getSimpleName();
+
+    private static final String STEP_LIST_ITEM = "step_list_item";
+
+    @BindView(R.id.tv_step_description)
+    TextView mStepDescription;
+    @BindView(R.id.tv_step_short_description)
+    TextView mStepShortDescription;
+
     @BindView(R.id.player_view)
     SimpleExoPlayerView mPlayerView;
     private ExoPlayer mExoPlayer;
 
     private Recipe mRecipe;
 
+    private Unbinder unbinder;
+
     public DetailStepFragment() {
         // Required empty public constructor
     }
 
+    public static DetailStepFragment newInstance(Step step) {
+
+        Bundle args = new Bundle();
+        args.putParcelable(STEP_LIST_ITEM, step);
+
+        DetailStepFragment fragment = new DetailStepFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_detail_step, container, false);
-        ButterKnife.bind(this, rootView);
+        unbinder = ButterKnife.bind(this, rootView);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Step step = bundle.getParcelable(STEP_LIST_ITEM);
 
+            if (step != null) {
+                mStepShortDescription.setText(step.getShortDescription());
+                initializedPlayer(step.getVideoURL());
+                mStepDescription.setText(step.getDescription());
 
-
+            }
+        }
 
         return rootView;
     }
-
-
-
 
 
     public void initializedPlayer(String videoUrl) {
@@ -106,5 +116,11 @@ public class DetailStepFragment extends Fragment {
     public void onStop() {
         super.onStop();
         releasePlayer();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 }
