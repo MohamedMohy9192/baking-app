@@ -1,26 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/widget_margin">
 
     <TextView
+        android:id="@+id/tv_all_ingredient"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/appwidget_image"
-        android:textColor="@color/colorPrimary"
-        android:layout_centerHorizontal="true"
-        android:textSize="50sp"
-        android:text="BakingApp" />
+        android:layout_height="wrap_content" />
 
-    <ImageView
-        android:id="@+id/appwidget_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="8dp"
-        android:src="@drawable/iv_reicpe_place_holder"
 
-        />
-
-</RelativeLayout>
+</FrameLayout>

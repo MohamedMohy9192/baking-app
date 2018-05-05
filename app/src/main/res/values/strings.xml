@@ -9,4 +9,27 @@
     <string name="recipes_error_msg">Error with loading recipes try again later!</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+
+    <!--Label for widget ingredients preference-->
+    <string name="pref_widget_label">Widget Ingredients</string>
+
+    <!--Label for Nutella Pie list preference option-->
+    <string name="pref_widget_label_nutella_pie">Nutella Pie</string>
+    <!--Label for Brownies list preference option-->
+    <string name="pref_widget_label_brownies">Brownies</string>
+    <string name="pref_widget_label_yellow_cake">Yellow Cake</string>
+    <string name="pref_widget_label_cheesecake">Cheesecake</string>
+
+    <!--Key name for widget preference in SharedPreferences file-->
+    <string name="pref_widget_key" translatable="false">widget_ingredients</string>
+
+    <!--Value in SharedPreferences file for Nutella Pie option-->
+    <string name="pref_widget_nutella_pie_value" translatable="false">0</string>
+    <!--Value in SharedPreferences file for Brownies option -->
+    <string name="pref_widget_brownies_value" translatable="false">1</string>
+
+    <string name="pref_widget_yellow_cake_value" translatable="false">2</string>
+    <string name="pref_widget_cheesecake_value" translatable="false">3</string>
+
+    <string name="settings_menu_item">Settings</string>
 </resources>

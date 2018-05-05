@@ -18,9 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".DetailActivity" />
 
-        <receiver android:name=".IngredientListWidget">
+        <receiver android:name=".IngredientWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -29,6 +29,13 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/ingredient_list_widget_info" />
         </receiver>
+
+        <service android:name=".IngredientService" />
+        <service
+            android:name=".ListWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>
