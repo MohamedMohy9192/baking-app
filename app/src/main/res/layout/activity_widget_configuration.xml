@@ -5,16 +5,15 @@
     android:padding="@dimen/root_layout_padding">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_main_recipe"
+        android:id="@+id/rv_widget_recipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <ProgressBar
+        android:id="@+id/pb_widget_loading_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="invisible"
-        android:id="@+id/pb_loading_indicator"/>
-
-
+        android:visibility="invisible" />
 </FrameLayout>
+

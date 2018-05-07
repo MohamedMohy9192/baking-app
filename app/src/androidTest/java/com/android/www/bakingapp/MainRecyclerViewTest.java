@@ -29,6 +29,7 @@ public class MainRecyclerViewTest {
                 .perform(RecyclerViewActions.actionOnItem(
                         ViewMatchers.hasDescendant(ViewMatchers.withText("Nutella Pie")),
                         ViewActions.click()));
+
     }
 
 

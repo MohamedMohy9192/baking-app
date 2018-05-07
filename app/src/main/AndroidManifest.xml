@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,12 +31,12 @@
                 android:resource="@xml/ingredient_list_widget_info" />
         </receiver>
 
-        <service android:name=".IngredientService" />
-        <service
-            android:name=".ListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".WidgetConfigurationActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

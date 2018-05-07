@@ -33,8 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<Recipe>>, RecipeAdapter.OnRecipeClickListener,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        implements LoaderManager.LoaderCallbacks<List<Recipe>>, RecipeAdapter.OnRecipeClickListener{
 
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -65,11 +64,6 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setAdapter(mRecipeAdapter);
 
         getSupportLoaderManager().initLoader(RECIPE_LOADER_ID, null, this);
-
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-
-        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
 
     }
 
@@ -102,14 +96,7 @@ public class MainActivity extends AppCompatActivity
         startActivity(openDetailActivity);
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.pref_widget_key))) {
-            String recipeId = sharedPreferences.getString(key,
-                    getString(R.string.pref_widget_nutella_pie_value));
-            IngredientService.startActionFetchIngredients(this, Integer.valueOf(recipeId));
-        }
-    }
+
 
     private static class RecipeAsyncTaskLoader extends AsyncTaskLoader<List<Recipe>> {
 
@@ -158,27 +145,5 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

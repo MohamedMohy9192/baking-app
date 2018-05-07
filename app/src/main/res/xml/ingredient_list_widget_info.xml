@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:configure="com.android.www.bakingapp.WidgetConfigurationActivity"
     android:initialLayout="@layout/ingredient_list_widget"
-    android:minHeight="100dp"
-    android:minWidth="100dp"
+    android:minHeight="200dp"
+    android:minWidth="220dp"
     android:previewImage="@drawable/iv_reicpe_place_holder"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="86400000"

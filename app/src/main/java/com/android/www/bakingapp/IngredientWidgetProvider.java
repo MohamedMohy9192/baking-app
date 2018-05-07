@@ -19,24 +19,12 @@ import com.android.www.bakingapp.model.Recipe;
  */
 public class IngredientWidgetProvider extends AppWidgetProvider {
 
-    private static final int NO_FLAG = 0;
-    private static final int PENDING_INTENT_CODE = 1;
-
-    public static final String RECIPE_INTENT_EXTRA = "recipe_extra";
-
-
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId, int recipeId) {
+                                int appWidgetId) {
 
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_view);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_list_widget);
 
-        Intent intent = new Intent(context, ListWidgetService.class);
-        intent.putExtra(RECIPE_INTENT_EXTRA, recipeId);
-
-
-
-        views.setRemoteAdapter(R.id.lv_widget, intent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -45,22 +33,12 @@ public class IngredientWidgetProvider extends AppWidgetProvider {
     //called once a new widget is created and every update interval which is set in widget_info xml file
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-        //get the key from the preference.
-//        IngredientService.startActionFetchIngredients(context);
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String recipeId = sharedPreferences.getString(context.getString(R.string.pref_widget_key),
-                context.getString(R.string.pref_widget_nutella_pie_value));
-        IngredientService.startActionFetchIngredients(context, Integer.valueOf(recipeId));
 
-    }
-
-    public static void updateIngredientWidget(Context context, AppWidgetManager appWidgetManager,
-                                              int[] appWidgetIds, int recipeId) {
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId, recipeId);
+            updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
+
 
     @Override
     public void onEnabled(Context context) {
