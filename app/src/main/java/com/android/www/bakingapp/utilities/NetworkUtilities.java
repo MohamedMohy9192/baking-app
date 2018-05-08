@@ -21,9 +21,13 @@ import java.util.Scanner;
  * Created by OWNER on 4/29/2018.
  */
 
-public class NetworkUtilities {
+public final class NetworkUtilities {
 
     private static final String LOG_TAG = NetworkUtilities.class.getSimpleName();
+
+    private NetworkUtilities(){
+
+    }
 
     public static List<Recipe> getRecipeFromJson(String jsonResponse) {
         if (TextUtils.isEmpty(jsonResponse)) {

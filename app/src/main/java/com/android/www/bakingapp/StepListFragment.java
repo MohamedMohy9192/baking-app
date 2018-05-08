@@ -3,6 +3,7 @@ package com.android.www.bakingapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,7 @@ import butterknife.Unbinder;
 public class StepListFragment extends Fragment implements StepListAdapter.OnStepItemClickListener {
 
     public static final String RECIPE_STEP_LIST = "recipe_step_list";
+    private static final String RECYCLER_POSITION_STATE = "position_state";
 
     @BindView(R.id.rv_recipe_steps)
     RecyclerView mRecyclerView;
@@ -60,7 +62,7 @@ public class StepListFragment extends Fragment implements StepListAdapter.OnStep
         super.onAttach(context);
         try {
             mOnListFragmentListener = (OnListFragmentListener) context;
-        }catch (ClassCastException e){
+        } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + "must implement OnListFragmentListener");
         }
@@ -85,6 +87,11 @@ public class StepListFragment extends Fragment implements StepListAdapter.OnStep
 
         mRecyclerView.setAdapter(mStepListAdapter);
 
+        if (savedInstanceState != null) {
+            Parcelable recyclerViewState = savedInstanceState.getParcelable(RECYCLER_POSITION_STATE);
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+        }
+
         Bundle bundle = getArguments();
         if (bundle != null) {
 
@@ -102,6 +109,13 @@ public class StepListFragment extends Fragment implements StepListAdapter.OnStep
     @Override
     public void onStepItemClicked(int itemPosition) {
         mOnListFragmentListener.onListFragmentItemClicked(itemPosition);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Parcelable parcelable = mRecyclerView.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(RECYCLER_POSITION_STATE, parcelable);
     }
 
     @Override

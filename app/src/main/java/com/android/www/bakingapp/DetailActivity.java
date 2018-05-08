@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.android.www.bakingapp.model.Ingredient;
 import com.android.www.bakingapp.model.Recipe;
 import com.android.www.bakingapp.model.Step;
 
@@ -14,7 +13,7 @@ public class DetailActivity extends AppCompatActivity
         implements StepListFragment.OnListFragmentListener {
 
 
-    int mItemListFragmentPosition = 0;
+    private int mItemListFragmentPosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +34,6 @@ public class DetailActivity extends AppCompatActivity
                 Recipe recipe = intent.getParcelableExtra(MainActivity.RECIPE_INTENT_EXTRA);
                 StepListFragment stepListFragment = StepListFragment.newInstance(recipe);
 
-                setTitle(recipe.getName());
-
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.step_list_container, stepListFragment)
                         .commit();
@@ -55,7 +52,6 @@ public class DetailActivity extends AppCompatActivity
                         .commit();
             }
         }
-
     }
 
     @Override
@@ -74,7 +70,7 @@ public class DetailActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
         }

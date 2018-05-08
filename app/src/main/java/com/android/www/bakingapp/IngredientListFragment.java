@@ -2,6 +2,8 @@ package com.android.www.bakingapp;
 
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +27,7 @@ import butterknife.Unbinder;
 public class IngredientListFragment extends Fragment {
 
 
+    private static final String BUNDLE_RECYCLER_LAYOUT = "recycler_potsition";
     private IngredientAdapter mIngredientAdapter;
 
     @BindView(R.id.rv_recipe_ingredient)
@@ -67,6 +70,11 @@ public class IngredientListFragment extends Fragment {
 
         mRecyclerView.setAdapter(mIngredientAdapter);
 
+        if (savedInstanceState != null) {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+
         Bundle bundle = getArguments();
 
         if (bundle != null) {
@@ -79,6 +87,13 @@ public class IngredientListFragment extends Fragment {
         }
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT,
+                mRecyclerView.getLayoutManager().onSaveInstanceState());
     }
 
     @Override

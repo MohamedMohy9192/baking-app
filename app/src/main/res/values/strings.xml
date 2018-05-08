@@ -32,4 +32,5 @@
     <string name="pref_widget_cheesecake_value" translatable="false">3</string>
 
     <string name="settings_menu_item">Settings</string>
+    <string name="thumbnail_image_content_des">thumbnail</string>
 </resources>
