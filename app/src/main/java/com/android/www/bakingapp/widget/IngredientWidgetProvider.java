@@ -1,4 +1,4 @@
-package com.android.www.bakingapp;
+package com.android.www.bakingapp.widget;
 
 import android.annotation.TargetApi;
 import android.app.IntentService;
@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.v7.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+import com.android.www.bakingapp.R;
 import com.android.www.bakingapp.model.Recipe;
 
 /**

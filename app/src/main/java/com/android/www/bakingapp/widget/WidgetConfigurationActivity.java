@@ -1,8 +1,8 @@
-package com.android.www.bakingapp;
+package com.android.www.bakingapp.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
-import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -10,12 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import com.android.www.bakingapp.R;
+import com.android.www.bakingapp.RecipeAdapter;
 import com.android.www.bakingapp.model.Ingredient;
 import com.android.www.bakingapp.model.Recipe;
 import com.android.www.bakingapp.utilities.NetworkUtilities;
@@ -83,13 +84,14 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
 
+    @NonNull
     @Override
     public Loader<List<Recipe>> onCreateLoader(int id, Bundle args) {
         return new RecipeAsyncTaskLoader(this);
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Recipe>> loader, List<Recipe> data) {
+    public void onLoadFinished(@NonNull Loader<List<Recipe>> loader, List<Recipe> data) {
         mLoadingIndicatorProgressBar.setVisibility(View.INVISIBLE);
         if (data != null) {
             mRecipeAdapter.setRecipes(data);
@@ -99,7 +101,7 @@ public class WidgetConfigurationActivity extends AppCompatActivity
     }
 
     @Override
-    public void onLoaderReset(Loader<List<Recipe>> loader) {
+    public void onLoaderReset(@NonNull Loader<List<Recipe>> loader) {
 
     }
 

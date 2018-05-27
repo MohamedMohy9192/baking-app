@@ -100,14 +100,14 @@ public class DetailStepFragment extends Fragment {
                 String stepThumbnailUrl = step.getThumbnailURL();
                 int thumbnailViewHolder = R.drawable.iv_reicpe_place_holder;
 
-//                if (TextUtils.isEmpty(stepThumbnailUrl)) {
-//                    mThumbnailImageView.setImageResource(thumbnailViewHolder);
-//                } else {
-//                    Picasso.get().load(stepThumbnailUrl)
-//                            .placeholder(thumbnailViewHolder)
-//                            .error(thumbnailViewHolder)
-//                            .into(mThumbnailImageView);
-//                }
+                if (TextUtils.isEmpty(stepThumbnailUrl)) {
+                    mThumbnailImageView.setImageResource(thumbnailViewHolder);
+                } else {
+                    Picasso.get().load(stepThumbnailUrl)
+                            .placeholder(thumbnailViewHolder)
+                            .error(thumbnailViewHolder)
+                            .into(mThumbnailImageView);
+                }
             }
         }
 
