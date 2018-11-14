@@ -1,5 +1,5 @@
 # Baking-App
-Display A list of some types of baking and details about them.
+Display A list of some types of baking and details about their ingredients and steps to prepare.
 
 ## Screenshots 
 
